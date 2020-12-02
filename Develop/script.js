@@ -1,0 +1,1 @@
+$("#currentDay").text(dayjs().format("dddd, MMMM DD, YYYY"));
