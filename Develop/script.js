@@ -8,9 +8,10 @@ setInterval(function() {
 // let hour = 12;
 let savedTasks = {};
 let hour = dayjs().hour();
+let minute = dayjs().minute();
 let scheduleList = $(".row");
-// scheduleList = jQuery.makeArray(scheduleList);
 let scheduleText = $(".schedule-text").text();
+// scheduleList[0]['children'][1]['textContent'];
 
 let highlight = function() {
     if (parseInt(this.id) < hour) {
@@ -50,4 +51,27 @@ let taskLoad = function() {
     savedTasks = JSON.parse(localStorage.getItem("tasks"));
 }
 
-// taskSave();
+let clickHandler = function(event) {
+    if ($(event.target).hasClass("schedule-text")) {
+        let textareaEl = $("<textarea>");
+        textareaEl.val($(event.target).text());
+        
+        $(event.target).text("");
+        $(event.target).append(textareaEl);
+    } else if ($(event.target).hasClass("saveBtn")) {
+        // debugger;
+        let targetRow = $(event.target).parent().siblings(".schedule-text");
+        // if (targetRow.has("textarea").length === 0) {
+        //     return;
+        // }
+
+        let newText = targetRow.children("textarea").val().trim();
+        targetRow.children("textarea").remove();
+        targetRow.text(newText);
+
+        taskSave();
+    }
+}
+
+taskLoad();
+$(".container").on("click", clickHandler);
