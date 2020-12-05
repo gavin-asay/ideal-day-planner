@@ -49,6 +49,10 @@ let taskSave = function() {
 
 let taskLoad = function() {
     savedTasks = JSON.parse(localStorage.getItem("tasks"));
+
+    for (let i = 8; i < 19; i++) {
+        $("#" + i).children(".schedule-text").html("<p>" + savedTasks[i] + "</p>");
+    }
 }
 
 let clickHandler = function(event) {
@@ -56,18 +60,26 @@ let clickHandler = function(event) {
         let textareaEl = $("<textarea>");
         textareaEl.val($(event.target).text());
         
-        $(event.target).text("");
+        $(event.target).children("p").remove();
         $(event.target).append(textareaEl);
+        textareaEl.trigger("focus");
+    } else if (event.target.matches(".schedule-text > p")) {
+        let textareaEl = $("<textarea>");
+        textareaEl.val($(event.target).text());
+
+        $(event.target).parent().append(textareaEl);
+        $(event.target).remove();
+        textareaEl.trigger("focus");
     } else if ($(event.target).hasClass("saveBtn")) {
-        // debugger;
+        // jQuery traverses the DOM to handle match saveBtn with its corresponding textarea
         let targetRow = $(event.target).parent().siblings(".schedule-text");
-        // if (targetRow.has("textarea").length === 0) {
-        //     return;
-        // }
+        if (targetRow.has("textarea").length === 0) {
+            return;
+        }
 
         let newText = targetRow.children("textarea").val().trim();
         targetRow.children("textarea").remove();
-        targetRow.text(newText);
+        targetRow.html("<p>" + newText + "</p>");
 
         taskSave();
     }
