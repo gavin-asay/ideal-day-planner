@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./Develop/style.css" />
+    <link rel="stylesheet" href="./assets/style.css" />
     <title>Work Day Scheduler</title>
   </head>
 
@@ -30,6 +30,7 @@
       <p id="currentTime" class="lead"></p>
     </header>
     <main class="container">
+      <!-- Note that rows have numerical IDs that match the hour they represent, these same numbers are used as property names and in for-loop operations in script.js -->
       <div id="8" class="row">
         <div class="col-2 d-flex align-items-center justify-content-end"><p>8 am</p></div>
         <div class="col-8 schedule-text d-flex align-items-center"></div>
@@ -131,6 +132,6 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/dayjs.min.js" integrity="sha512-C2m821NxMpJ4Df47O4P/17VPqt0yiK10UmGl59/e5ynRRYiCSBvy0KHJjhp2XIjUJreuR+y3SIhVyiVilhCmcQ==" crossorigin="anonymous"></script>
-    <script src="./Develop/script.js"></script>
+    <script src="./assets/script.js"></script>
   </body>
 </html>

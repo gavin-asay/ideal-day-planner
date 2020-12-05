@@ -1,18 +1,18 @@
+//day.js used as alternative to moment.js
 $("#currentDay").text(dayjs().format("dddd, MMMM DD, YYYY"));
 $("#currentTime").text(dayjs().format("hh:mm:ss a"));
 
+// clock interval function
 setInterval(function() {
     $("#currentTime").text(dayjs().format("hh:mm:ss a"));
 }, 1000);
 
-// let hour = 12;
 let savedTasks = {};
 let hour = dayjs().hour();
-let minute = dayjs().minute();
 let scheduleList = $(".row");
-let scheduleText = $(".schedule-text").text();
-// scheduleList[0]['children'][1]['textContent'];
 
+// each .row element has an ID corresponding to the hour it represents
+// highlight() compares that ID with the current hour to apply the past, present, future classes
 let highlight = function() {
     if (parseInt(this.id) < hour) {
         $(this).children(".col-8").removeClass("past present future").addClass("past");
@@ -23,25 +23,26 @@ let highlight = function() {
     }
 }
 
-scheduleList.each(highlight);
-
+// current hour is checked every 10 minutes and refreshes highlight() as needed
 setInterval(function() {
     scheduleList.each(highlight);
+    $("#currentDay").text(dayjs().format("dddd, MMMM DD, YYYY"));
 }, 1000 * 60 * 10);
 
 let taskSave = function() {
     savedTasks = {
-        8: $("#8 > .col-8").text(),
-        9: $("#9 > .col-8").text(),
-        10: $("#10 > .col-8").text(),
-        11: $("#11 > .col-8").text(),
-        12: $("#12 > .col-8").text(),
-        13: $("#13 > .col-8").text(),
-        14: $("#14 > .col-8").text(),
-        15: $("#15 > .col-8").text(),
-        16: $("#16 > .col-8").text(),
-        17: $("#17 > .col-8").text(),
-        18: $("#18 > .col-8").text()
+        // property names likewise correspond to .row IDs
+        8: $("#8 > .col-8").text().trim(),
+        9: $("#9 > .col-8").text().trim(),
+        10: $("#10 > .col-8").text().trim(),
+        11: $("#11 > .col-8").text().trim(),
+        12: $("#12 > .col-8").text().trim(),
+        13: $("#13 > .col-8").text().trim(),
+        14: $("#14 > .col-8").text().trim(),
+        15: $("#15 > .col-8").text().trim(),
+        16: $("#16 > .col-8").text().trim(),
+        17: $("#17 > .col-8").text().trim(),
+        18: $("#18 > .col-8").text().trim()
     };
  
     localStorage.setItem("tasks", JSON.stringify(savedTasks));
@@ -56,6 +57,7 @@ let taskLoad = function() {
 }
 
 let clickHandler = function(event) {
+    // function handles both clicking on text to update and save buttons
     if ($(event.target).hasClass("schedule-text")) {
         let textareaEl = $("<textarea>");
         textareaEl.val($(event.target).text());
@@ -85,5 +87,6 @@ let clickHandler = function(event) {
     }
 }
 
+scheduleList.each(highlight);
 taskLoad();
 $(".container").on("click", clickHandler);

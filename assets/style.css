@@ -79,6 +79,14 @@ textarea {
   transition: all .3s ease-in-out;
 }
 
+.row:first-child .col-2:first-child {
+  border-top: 2px dashed black;
+}
+
+.col-2:first-child {
+  border-bottom: 2px dashed black;
+}
+
 .col-2 p {
   margin-bottom: 0;
   font-size: 1.5rem;
