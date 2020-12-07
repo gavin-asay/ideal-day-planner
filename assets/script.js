@@ -52,8 +52,10 @@ let taskSave = function() {
 let taskLoad = function() {
     savedTasks = JSON.parse(localStorage.getItem("tasks"));
 
-    for (let i = 8; i < 19; i++) {
-        $("#" + i).children(".schedule-text").html("<p>" + savedTasks[i] + "</p>");
+    if (savedTasks) {
+        for (let i = 8; i < 19; i++) {
+            $("#" + i).children(".schedule-text").html("<p>" + savedTasks[i] + "</p>");
+        }
     }
 }
 
