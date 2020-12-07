@@ -26,6 +26,7 @@ let highlight = function() {
 
 // current hour is checked every 10 minutes and refreshes highlight() as needed
 setInterval(function() {
+    hour = dayjs().hour();
     scheduleList.each(highlight);
     $("#currentDay").text(dayjs().format("dddd, MMMM DD, YYYY"));
 }, 1000 * 60 * 10);
