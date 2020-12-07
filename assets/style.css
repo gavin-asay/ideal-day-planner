@@ -5,11 +5,12 @@ body {
 }
 
 textarea {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.3);
   border: none;
   resize: none;
   color: #000000;
   border-left: 1px solid black;
+  /* large padding-top value roughly aligns textarea text with p text it replaces */
   padding: 28px 10px 10px 1rem;
   width: 100%;
   height: 100%;
@@ -34,9 +35,11 @@ textarea {
   border-radius: 15px;
 }
 
+/* changed pre-wrap to nowrap because time labels and task descriptions were getting out of alignment */
 .row {
-  white-space: pre-wrap;
-  height: 80px;
+  white-space: nowrap;
+  min-height: 80px;
+  max-height: 80px;
   border-top: 1px solid white;;
 }
 
@@ -83,19 +86,25 @@ textarea {
   border-top: 2px dashed black;
 }
 
+.row:first-child {
+  white-space: nowrap;
+}
+
 .col-2:first-child {
   border-bottom: 2px dashed black;
 }
 
 .col-2 p {
   margin-bottom: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
+  overflow: ellipsis;
 }
 
 .schedule-text {
   margin: 0;
   padding: 0 0 0 1px;
+  max-height: 79px;
 }
 
 .schedule-text p {

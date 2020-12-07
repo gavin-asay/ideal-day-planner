@@ -14,6 +14,7 @@ let scheduleList = $(".row");
 // each .row element has an ID corresponding to the hour it represents
 // highlight() compares that ID with the current hour to apply the past, present, future classes
 let highlight = function() {
+    // debugger;
     if (parseInt(this.id) < hour) {
         $(this).children(".col-8").removeClass("past present future").addClass("past");
     } else if (parseInt(this.id) === hour) {
@@ -90,3 +91,10 @@ let clickHandler = function(event) {
 scheduleList.each(highlight);
 taskLoad();
 $(".container").on("click", clickHandler);
+// asks for confirmation to leave page if a <textarea> is still present
+window.addEventListener("beforeunload", function(event) {
+    if (document.querySelector("textarea")) {
+        event.preventDefault;
+        event.returnValue = "You still have unsaved changes. Are you sure you want to leave or refresh the page?"
+    }
+});
